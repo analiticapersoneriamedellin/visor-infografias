@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro Animado de Infografías con Zoom</title>
+    <title>Libro Animado de Infografías - Personería Distrital de Medellín</title>
     
     <!-- Cargamos jQuery y Turn.js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -15,7 +15,8 @@
         }
 
         body {
-            background-color: #f0f2f5;
+            /* Fondo limpio y profesional */
+            background-color: #f4f6f9; 
             margin: 0;
             padding: 0;
             display: flex;
@@ -37,16 +38,15 @@
             position: relative;
         }
 
-        /* Contenedor que ajustará su altura en el flujo de la página */
+        /* Contenedor del libro */
         .scale-wrapper {
             width: 100%;
             height: 550px;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: auto; /* Permite scroll cuando hay zoom en pantallas pequeñas */
+            overflow: auto; 
             padding: 20px;
-            border-radius: 8px;
         }
 
         /* El contenedor rígido del libro que escalaremos con CSS */
@@ -55,14 +55,14 @@
             height: 550px;
             transform-origin: center center;
             flex-shrink: 0;
-            transition: transform 0.2s ease-out; /* Transición suave al hacer zoom */
+            transition: transform 0.2s ease-out;
         }
 
         /* El visor de Turn.js */
         #book-viewport {
             width: 800px;
             height: 550px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            box-shadow: 0 16px 38px rgba(0, 45, 98, 0.15); /* Sombra sutil con tono base */
             cursor: pointer;
         }
 
@@ -76,11 +76,11 @@
             background-position: center;
         }
 
-        /* Barra de herramientas inferior */
+        /* Barra de herramientas inferior con Colores Institucionales */
         .controles {
-            margin-top: 20px;
+            margin-top: 25px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             justify-content: center;
             padding-bottom: 10px;
@@ -88,11 +88,13 @@
         }
 
         .btn {
-            background-color: #002d62; /* Azul institucional */
-            color: white;
+            /* Botones principales: Azul Institucional Oscuro (CMYK 91,79,62,97 simulado en HEX corporativo) */
+            background-color: #0b151d; 
+            color: #ffffff;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 24px;
             font-size: 14px;
+            font-weight: 600;
             border-radius: 4px;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -103,19 +105,21 @@
         }
 
         .btn:hover {
-            background-color: #004080;
+            background-color: #172635;
         }
 
         .btn:active {
             transform: scale(0.95);
         }
 
-        /* Estilo especial para los botones de zoom */
+        /* Botones de Zoom: Amarillo Institucional (Pantone 143 C / RGB: 249, 178, 51) */
         .btn-zoom {
-            background-color: #4a5568; /* Color gris oscuro distinguible */
+            background-color: rgb(249, 178, 51); 
+            color: #0b151d; /* Texto oscuro para máxima legibilidad */
         }
+        
         .btn-zoom:hover {
-            background-color: #2d3748;
+            background-color: rgb(230, 160, 40);
         }
     </style>
 </head>
@@ -125,7 +129,7 @@
         <div class="scale-wrapper" id="wrapper">
             <div class="scale-container" id="scaler">
                 <div id="book-viewport">
-                    <!-- Páginas vinculadas archivos -->
+                    <!-- Páginas vinculadas a tus archivos -->
                     <div class="page" style="background-image: url('png1.png');"></div>
                     <div class="page" style="background-image: url('png2.png');"></div>
                     <div class="page" style="background-image: url('png3.png');"></div>
@@ -135,12 +139,12 @@
         </div>
 
         <div class="controles">
-            <!-- Navegación -->
+            <!-- Navegación Principal -->
             <button class="btn" id="prev-btn">◀ Anterior</button>
             
-            <!-- Botones de Lupa (Zoom) -->
-            <button class="btn btn-zoom" id="zoom-in-btn">Acercar (+)</button>
-            <button class="btn btn-zoom" id="zoom-out-btn">Alejar (-)</button>
+            <!-- Herramientas de Zoom con Color Corporativo -->
+            <button class="btn btn-zoom" id="zoom-in-btn">🔍 Acercar (+)</button>
+            <button class="btn btn-zoom" id="zoom-out-btn">🔍 Alejar (-)</button>
             
             <button class="btn" id="next-btn">Siguiente ▶</button>
         </div>
@@ -150,37 +154,32 @@
         const anchoLibro = 800;
         const altoLibro = 550;
         
-        // Variables para controlar el estado del zoom y escala adaptativa
         var escalaBase = 1;
-        var nivelZoom = 1; // 1 es el tamaño normal, irá subiendo o bajando
+        var nivelZoom = 1;
 
         function calcularEscalaBase() {
             var anchoPantalla = $(window).width();
             var scale = 1;
 
             if (anchoPantalla < anchoLibro) {
-                scale = (anchoPantalla * 0.90) / anchoLibro; // 90% del viewport
+                scale = (anchoPantalla * 0.90) / anchoLibro;
             }
             return scale;
         }
 
         function aplicarTransformacion() {
-            // Combinamos la escala adaptativa base de la pantalla con el nivel de zoom del usuario
             var escalaFinal = escalaBase * nivelZoom;
 
-            // Aplicamos la transformación combinada
             $('#scaler').css({
                 'transform': 'scale(' + escalaFinal + ')',
                 '-webkit-transform': 'scale(' + escalaFinal + ')'
             });
 
-            // Ajustamos el alto del wrapper físico para que no se corten los botones
             var nuevaAlturaFisica = altoLibro * escalaFinal;
             $('#wrapper').css('height', (nuevaAlturaFisica + 40) + 'px');
         }
 
         $(document).ready(function() {
-            // Inicializamos Turn.js con sus medidas estables
             $('#book-viewport').turn({
                 width: anchoLibro,
                 height: altoLibro,
@@ -189,11 +188,9 @@
                 acceleration: true
             });
 
-            // Medimos y aplicamos escala inicial
             escalaBase = calcularEscalaBase();
             aplicarTransformacion();
 
-            // Configurar botones de navegación
             $('#prev-btn').on('click', function() {
                 $('#book-viewport').turn('previous');
             });
@@ -202,7 +199,6 @@
                 $('#book-viewport').turn('next');
             });
 
-            // FUNCIONALIDAD DE ZOOM (Aumentar de 0.25 en 0.25 hasta un máximo de 2x)
             $('#zoom-in-btn').on('click', function() {
                 if (nivelZoom < 2.0) {
                     nivelZoom += 0.25;
@@ -210,7 +206,6 @@
                 }
             });
 
-            // Disminuir zoom hasta un mínimo de 0.75x para pantallas muy grandes o 1x normal
             $('#zoom-out-btn').on('click', function() {
                 if (nivelZoom > 1.0) {
                     nivelZoom -= 0.25;
@@ -219,13 +214,11 @@
             });
         });
 
-        // Al cambiar tamaño de pantalla, recalculamos la escala base y mantenemos el nivel de zoom
         $(window).on('resize', function() {
             escalaBase = calcularEscalaBase();
             aplicarTransformacion();
         });
 
-        // Controles de teclado
         $(window).bind('keydown', function(e){
             if (e.keyCode == 37) {
                 $('#book-viewport').turn('previous');
