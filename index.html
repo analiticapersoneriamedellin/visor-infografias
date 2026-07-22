@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro Animado de Infografías - Personería Distrital de Medellín</title>
+    <title>Visor de Infografías - Personería Distrital de Medellín</title>
     
     <!-- Cargamos jQuery y Turn.js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -15,7 +15,6 @@
         }
 
         body {
-            /* Fondo limpio y profesional */
             background-color: #f4f6f9; 
             margin: 0;
             padding: 0;
@@ -38,7 +37,7 @@
             position: relative;
         }
 
-        /* Contenedor del libro */
+        /* Contenedor del libro (Optimizado para modo Doble Página) */
         .scale-wrapper {
             width: 100%;
             height: 550px;
@@ -49,7 +48,7 @@
             padding: 20px;
         }
 
-        /* El contenedor rígido del libro que escalaremos con CSS */
+        /* El contenedor rígido vuelve a ser de 800px para albergar ambas páginas */
         .scale-container {
             width: 800px; 
             height: 550px;
@@ -58,15 +57,15 @@
             transition: transform 0.2s ease-out;
         }
 
-        /* El visor de Turn.js */
+        /* El visor de Turn.js a doble página */
         #book-viewport {
             width: 800px;
             height: 550px;
-            box-shadow: 0 16px 38px rgba(0, 45, 98, 0.15); /* Sombra sutil con tono base */
+            box-shadow: 0 16px 38px rgba(0, 45, 98, 0.15);
             cursor: pointer;
         }
 
-        /* Páginas individuales */
+        /* Cada página física mide exactamente la mitad del libro (400px) */
         #book-viewport .page {
             width: 400px;
             height: 550px;
@@ -88,7 +87,6 @@
         }
 
         .btn {
-            /* Botones principales: Azul Institucional Oscuro (CMYK 91,79,62,97 simulado en HEX corporativo) */
             background-color: #0b151d; 
             color: #ffffff;
             border: none;
@@ -112,10 +110,10 @@
             transform: scale(0.95);
         }
 
-        /* Botones de Zoom: Amarillo Institucional (Pantone 143 C / RGB: 249, 178, 51) */
+        /* Botones de Zoom: Amarillo Institucional (Pantone 143 C) */
         .btn-zoom {
             background-color: rgb(249, 178, 51); 
-            color: #0b151d; /* Texto oscuro para máxima legibilidad */
+            color: #0b151d; 
         }
         
         .btn-zoom:hover {
@@ -129,29 +127,109 @@
         <div class="scale-wrapper" id="wrapper">
             <div class="scale-container" id="scaler">
                 <div id="book-viewport">
-                    <!-- Páginas vinculadas a tus archivos -->
-                    <div class="page" style="background-image: url('png1.png');"></div>
-                    <div class="page" style="background-image: url('png2.png');"></div>
-                    <div class="page" style="background-image: url('png3.png');"></div>
-                    <div class="page" style="background-image: url('png4.png');"></div>
+                    <!-- Lista de infografías dispuestas en pares (Izquierda y Derecha) -->
+                    
+                    <!-- Capitulo 1: Salud -->
+                    <div class="page" style="background-image: url('salud1.png');"></div>
+                    <div class="page" style="background-image: url('salud2.png');"></div>
+                    
+                    <!-- Capitulo 2: Turismo -->
+                    <div class="page" style="background-image: url('turismo1.png');"></div>
+                    <div class="page" style="background-image: url('turismo2.png');"></div>
+                    
+                    <!-- Capitulo 3: Movilidad Sostenible -->
+                    <div class="page" style="background-image: url('movilidad1.png');"></div>
+                    <div class="page" style="background-image: url('movilidad2.png');"></div>
+                    
+                    <!-- Capitulo 4: Brechas -->
+                    <div class="page" style="background-image: url('brecha1.png');"></div>
+                    <div class="page" style="background-image: url('brecha2.png');"></div>
+                    
+                    <!-- Capitulo 5: Habitantes de Calle -->
+                    <div class="page" style="background-image: url('habitantes1.png');"></div>
+                    <div class="page" style="background-image: url('habitantes2.png');"></div>
+                    
+                    <!-- Capitulo 6: Defensores Derechos Humanos -->
+                    <div class="page" style="background-image: url('defensores1.png');"></div>
+                    <div class="page" style="background-image: url('defensores2.png');"></div>
+                    
+                    <!-- Capitulo 7: Niñez y Adolescencia -->
+                    <div class="page" style="background-image: url('ninez1.png');"></div>
+                    <div class="page" style="background-image: url('ninez2.png');"></div>
+                    
+                    <!-- Capitulo 8: Ciudad Inclusiva -->
+                    <div class="page" style="background-image: url('ciudad1.png');"></div>
+                    <div class="page" style="background-image: url('ciudad2.png');"></div>
+                    
+                    <!-- Capitulo 9: Víctimas del Conflicto Armado -->
+                    <div class="page" style="background-image: url('victimas1.png');"></div>
+                    <div class="page" style="background-image: url('victimas2.png');"></div>
+                    
+                    <!-- Capitulo 10: Derecho de las Personas Mayores -->
+                    <div class="page" style="background-image: url('personasMayores1.png');"></div>
+                    <div class="page" style="background-image: url('personasMayores2.png');"></div>
+                    
+                    <!-- Capitulo 11: Libertad Religiosa y de Cultos -->
+                    <div class="page" style="background-image: url('religiosa1.png');"></div>
+                    <div class="page" style="background-image: url('religiosa2.png');"></div>
+                    
+                    <!-- Capitulo 12: Personas Privadas de la Libertad -->
+                    <div class="page" style="background-image: url('penal1.png');"></div>
+                    <div class="page" style="background-image: url('penal2.png');"></div>
+                    
+                    <!-- Capitulo 13: Violencia Basada en Género contra las Mujeres -->
+                    <div class="page" style="background-image: url('mujeres1.png');"></div>
+                    <div class="page" style="background-image: url('mujeres2.png');"></div>
+                    
+                    <!-- Capitulo 14: Transformaciones Familiares -->
+                    <div class="page" style="background-image: url('familia1.png');"></div>
+                    <div class="page" style="background-image: url('familia2.png');"></div>
+                    
+                    <!-- Capitulo 15: Violencia Urbana Desplazamiento Forzado -->
+                    <div class="page" style="background-image: url('violenciaUrba1.png');"></div>
+                    <div class="page" style="background-image: url('violenciaUrba2.png');"></div>
+                    
+                    <!-- Capitulo 16: Medioambiente -->
+                    <div class="page" style="background-image: url('medioambiente1.png');"></div>
+                    <div class="page" style="background-image: url('medioambiente2.png');"></div>
+                    
+                    <!-- Capitulo 17: Etnicas Migrantes -->
+                    <div class="page" style="background-image: url('etnias1.png');"></div>
+                    <div class="page" style="background-image: url('etnias2.png');"></div>
+                    
+                    <!-- Capitulo 18: Participación Ciudadana -->
+                    <div class="page" style="background-image: url('participacionCiu1.png');"></div>
+                    <div class="page" style="background-image: url('participacionCiu2.png');"></div>
+                    
+                    <!-- Capitulo 19: Seres Sintientes -->
+                    <div class="page" style="background-image: url('seres1.png');"></div>
+                    <div class="page" style="background-image: url('seres2.png');"></div>
+                    
+                    <!-- Capitulo 20: Amenazas Digitales y Estrategias de Prevención -->
+                    <div class="page" style="background-image: url('amenzasD1.png');"></div>
+                    <div class="page" style="background-image: url('amenzasD2.png');"></div>
+                    
+                    <!-- Capitulo 21: Delitos de Alto Impacto -->
+                    <div class="page" style="background-image: url('delitoImpacto1.png');"></div>
+                    <div class="page" style="background-image: url('delitoImpacto2.png');"></div>
+                    
+                    <!-- Capitulo 22: Personas con Discapacidad -->
+                    <div class="page" style="background-image: url('discapacidad1.png');"></div>
+                    <div class="page" style="background-image: url('discapacidad2.png');"></div>
                 </div>
             </div>
         </div>
 
         <div class="controles">
-            <!-- Navegación Principal -->
             <button class="btn" id="prev-btn">◀ Anterior</button>
-            
-            <!-- Herramientas de Zoom con Color Corporativo -->
-            <button class="btn btn-zoom" id="zoom-in-btn">🔍 Acercar (+)</button>
-            <button class="btn btn-zoom" id="zoom-out-btn">🔍 Alejar (-)</button>
-            
+            <button class="btn btn-zoom" id="zoom-in-btn">Acercar (+)</button>
+            <button class="btn btn-zoom" id="zoom-out-btn">Alejar (-)</button>
             <button class="btn" id="next-btn">Siguiente ▶</button>
         </div>
     </div>
 
     <script type="text/javascript">
-        const anchoLibro = 800;
+        const anchoLibro = 800; // Ancho total para renderizar ambas páginas juntas
         const altoLibro = 550;
         
         var escalaBase = 1;
@@ -162,7 +240,7 @@
             var scale = 1;
 
             if (anchoPantalla < anchoLibro) {
-                scale = (anchoPantalla * 0.90) / anchoLibro;
+                scale = (anchoPantalla * 0.92) / anchoLibro;
             }
             return scale;
         }
@@ -180,10 +258,12 @@
         }
 
         $(document).ready(function() {
+            // Inicialización en modo DOUBLE (Libro abierto clásico)
             $('#book-viewport').turn({
                 width: anchoLibro,
                 height: altoLibro,
                 autoCenter: true,
+                display: 'double', // Forzamos a mostrar ambas páginas lado a lado
                 gradients: true,
                 acceleration: true
             });
