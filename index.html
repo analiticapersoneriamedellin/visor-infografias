@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor de Infografías - Personería Distrital de Medellín</title>
+    <title>Observatorio de Derechos Humanos - Personería Distrital de Medellín</title>
     
     <!-- Cargamos jQuery y Turn.js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -20,10 +20,23 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             min-height: 100vh;
             font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* BARRA SUPERIOR INSTITUCIONAL */
+        .header-institucional {
+            width: 100%;
+            background-color: #0b151d; 
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border-bottom: 3px solid rgb(0, 141, 54); 
         }
 
         .contenedor-principal {
@@ -33,39 +46,53 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px;
-            position: relative;
+            padding: 20px 10px;
+            flex-grow: 1;
         }
 
-        /* Contenedor del libro (Optimizado para modo Doble Página) */
+        /* Contenedor del libro */
         .scale-wrapper {
             width: 100%;
-            height: 550px;
+            height: 570px;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: auto; 
-            padding: 20px;
+            padding: 10px;
         }
 
-        /* El contenedor rígido vuelve a ser de 800px para albergar ambas páginas */
+        /* Dimensiones base para escritorio (Doble página) */
         .scale-container {
-            width: 800px; 
-            height: 550px;
+            width: 808px; 
+            height: 558px;
             transform-origin: center center;
             flex-shrink: 0;
             transition: transform 0.2s ease-out;
+            position: relative;
         }
 
-        /* El visor de Turn.js a doble página */
+/* ELIMINAMOS LAS MÁRGENES DE COLORES Y DEJAMOS UN VISOR LIMPIO */
+        .pasta-dura-marcador {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: transparent; /* Quitamos el gradiente de colores */
+            border-radius: 4px;
+            box-shadow: 0 25px 50px rgba(0, 45, 98, 0.18); /* Mantenemos una sombra suave para dar relieve */
+            z-index: 1;
+        }
+
+        /* El visor de Turn.js */
         #book-viewport {
             width: 800px;
             height: 550px;
-            box-shadow: 0 16px 38px rgba(0, 45, 98, 0.15);
             cursor: pointer;
+            position: relative;
+            z-index: 2; 
         }
 
-        /* Cada página física mide exactamente la mitad del libro (400px) */
         #book-viewport .page {
             width: 400px;
             height: 550px;
@@ -75,11 +102,48 @@
             background-position: center;
         }
 
-        /* Barra de herramientas inferior con Colores Institucionales */
+/* LOMO CENTRAL DE MÁXIMA NOTORIEDAD E INTENSIDAD REALISTA */
+        .lomo-central {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px; /* Ancho ampliado para que la transición sea evidente */
+            height: 100%;
+            /* Fusión de sombras densas y brillos para un contraste indiscutible */
+            background: linear-gradient(to right, 
+                rgba(0, 0, 0, 0) 0%, 
+                rgba(0, 0, 0, 0.08) 20%, 
+                rgba(0, 0, 0, 0.25) 38%,
+                rgba(0, 0, 0, 0.60) 47%, 
+                rgba(0, 0, 0, 0.75) 50%, /* Eje central ultra oscuro y nítido */
+                rgba(0, 0, 0, 0.60) 53%, 
+                rgba(0, 0, 0, 0.25) 62%,
+                rgba(255, 255, 255, 0.18) 68%, /* Brillo sutil en el papel derecho para dar volumen */
+                rgba(0, 0, 0, 0.05) 85%, 
+                rgba(0, 0, 0, 0) 100%);
+            z-index: 10;
+            pointer-events: none; 
+        }
+
+        /* INDICADOR DE PÁGINAS DINÁMICO */
+        .contador-paginas {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0b151d;
+            background-color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* CONTROLES INFERIORES */
         .controles {
-            margin-top: 25px;
+            margin-top: 15px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
             justify-content: center;
             padding-bottom: 10px;
@@ -89,21 +153,25 @@
         .btn {
             background-color: #0b151d; 
             color: #ffffff;
-            border: none;
-            padding: 12px 24px;
+            border: 2px solid transparent;
+            padding: 12px 20px;
             font-size: 14px;
             font-weight: 600;
             border-radius: 4px;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: background 0.2s, transform 0.1s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .btn:hover {
-            background-color: #172635;
+        /* EFECTO HOVER CON ACENTO AZUL INSTITUCIONAL PANTONE 299 C */
+        .btn-nav:hover {
+            background-color: rgb(0, 159, 227); 
+            border-color: rgb(0, 159, 227); 
+            box-shadow: 0 4px 12px rgba(0, 159, 227, 0.4);
+            color: #ffffff; 
         }
 
         .btn:active {
@@ -118,17 +186,53 @@
         
         .btn-zoom:hover {
             background-color: rgb(230, 160, 40);
+            box-shadow: 0 4px 12px rgba(249, 178, 51, 0.3);
+        }
+
+        /* MEDIA QUERY PARA CELULARES */
+        @media (max-width: 800px) {
+            .header-institucional {
+                font-size: 13px;
+                padding: 12px 10px;
+            }
+
+            .scale-container {
+                width: 408px; 
+                height: 558px;
+            }
+
+            #book-viewport {
+                width: 400px;
+            }
+
+            .lomo-central {
+                display: none;
+            }
+
+            .btn {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- BARRA SUPERIOR FIJA -->
+    <div class="header-institucional">
+         PERSONERÍA DISTRITAL DE MEDELLÍN
+    </div>
+
     <div class="contenedor-principal">
         <div class="scale-wrapper" id="wrapper">
             <div class="scale-container" id="scaler">
+                <!-- Marco de la Cubierta del Libro -->
+                <div class="pasta-dura-marcador"></div>
+                
+                <!-- Sombra del Pliegue Central (Se acopla perfectamente encima del libro) -->
+                <div class="lomo-central"></div>
+
                 <div id="book-viewport">
-                    <!-- Lista de infografías dispuestas en pares (Izquierda y Derecha) -->
-                    
                     <!-- Capitulo 1: Salud -->
                     <div class="page" style="background-image: url('salud1.png');"></div>
                     <div class="page" style="background-image: url('salud2.png');"></div>
@@ -220,27 +324,38 @@
             </div>
         </div>
 
+        <!-- INDICADOR DE PÁGINA ACTUAL -->
+        <div class="contador-paginas" id="page-label">Cargando...</div>
+
+        <!-- CONTROLES CON PALETA CORPORATIVA -->
         <div class="controles">
-            <button class="btn" id="prev-btn">◀ Anterior</button>
-            <button class="btn btn-zoom" id="zoom-in-btn">Acercar (+)</button>
-            <button class="btn btn-zoom" id="zoom-out-btn">Alejar (-)</button>
-            <button class="btn" id="next-btn">Siguiente ▶</button>
+            <button class="btn btn-nav" id="prev-btn">◀ Anterior</button>
+            <button class="btn btn-zoom" id="zoom-in-btn">🔍 Acercar (+)</button>
+            <button class="btn btn-zoom" id="zoom-out-btn">🔍 Alejar (-)</button>
+            <button class="btn btn-nav" id="next-btn">Siguiente ▶</button>
         </div>
     </div>
 
     <script type="text/javascript">
-        const anchoLibro = 800; // Ancho total para renderizar ambas páginas juntas
-        const altoLibro = 550;
-        
+        var altoLibro = 550;
         var escalaBase = 1;
         var nivelZoom = 1;
+        
+        function obtenerAnchoObjetivo() {
+            return $(window).width() < 800 ? 400 : 800;
+        }
+
+        function obtenerModoDisplay() {
+            return $(window).width() < 800 ? 'single' : 'double';
+        }
 
         function calcularEscalaBase() {
             var anchoPantalla = $(window).width();
+            var anchoObjetivo = obtenerAnchoObjetivo();
             var scale = 1;
 
-            if (anchoPantalla < anchoLibro) {
-                scale = (anchoPantalla * 0.92) / anchoLibro;
+            if (anchoPantalla < anchoObjetivo + 40) {
+                scale = (anchoPantalla * 0.90) / anchoObjetivo;
             }
             return scale;
         }
@@ -254,22 +369,46 @@
             });
 
             var nuevaAlturaFisica = altoLibro * escalaFinal;
-            $('#wrapper').css('height', (nuevaAlturaFisica + 40) + 'px');
+            $('#wrapper').css('height', (nuevaAlturaFisica + 30) + 'px');
+        }
+
+        function actualizarContador(page) {
+            var totalPages = $('#book-viewport').turn('pages');
+            var modo = $('#book-viewport').turn('display');
+            
+            if (modo === 'single') {
+                $('#page-label').text("Página " + page + " de " + totalPages);
+            } else {
+                if (page === 1) {
+                    $('#page-label').text("Páginas 1 - 2 de " + totalPages);
+                } else if (page === totalPages || page >= totalPages - 1) {
+                    $('#page-label').text("Páginas " + (totalPages - 1) + " - " + totalPages + " de " + totalPages);
+                } else {
+                    var izq = page % 2 === 0 ? page : page - 1;
+                    var der = izq + 1;
+                    $('#page-label').text("Páginas " + izq + " - " + der + " de " + totalPages);
+                }
+            }
         }
 
         $(document).ready(function() {
-            // Inicialización en modo DOUBLE (Libro abierto clásico)
             $('#book-viewport').turn({
-                width: anchoLibro,
+                width: obtenerAnchoObjetivo(),
                 height: altoLibro,
                 autoCenter: true,
-                display: 'double', // Forzamos a mostrar ambas páginas lado a lado
+                display: obtenerModoDisplay(), 
                 gradients: true,
-                acceleration: true
+                acceleration: true,
+                when: {
+                    turned: function(event, page, view) {
+                        actualizarContador(page);
+                    }
+                }
             });
 
             escalaBase = calcularEscalaBase();
             aplicarTransformacion();
+            actualizarContador(1);
 
             $('#prev-btn').on('click', function() {
                 $('#book-viewport').turn('previous');
@@ -280,7 +419,7 @@
             });
 
             $('#zoom-in-btn').on('click', function() {
-                if (nivelZoom < 2.0) {
+                if (nivelZoom < 2.25) {
                     nivelZoom += 0.25;
                     aplicarTransformacion();
                 }
@@ -295,8 +434,17 @@
         });
 
         $(window).on('resize', function() {
+            var anchoObjetivo = obtenerAnchoObjetivo();
+            var modoObjetivo = obtenerModoDisplay();
+
+            if ($('#book-viewport').turn('display') !== modoObjetivo) {
+                $('#book-viewport').turn('display', modoObjetivo);
+                $('#book-viewport').turn('size', anchoObjetivo, altoLibro);
+            }
+
             escalaBase = calcularEscalaBase();
             aplicarTransformacion();
+            actualizarContador($('#book-viewport').turn('page'));
         });
 
         $(window).bind('keydown', function(e){
